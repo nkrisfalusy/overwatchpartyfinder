@@ -614,3 +614,12 @@ li {
 .notificationbutton.no-notification:after {
 	display: none;
 }
+
+.inactiveLink {
+   pointer-events: none;
+   cursor: default;
+}
+
+a.dropdown-toggle.page-scroll {
+   padding-left: 0px;
+}

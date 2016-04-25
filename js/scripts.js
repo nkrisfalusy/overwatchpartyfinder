@@ -319,3 +319,29 @@ function declineInvite(user){
 	xhttp.send();
 	checkForInvites();
 }
+
+function setSelectedRegion(region, user){
+	document.getElementById("selectedregion").innerHTML = region;
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+		  response = xhttp.responseText;
+		}
+	  };
+	xhttp.open("GET", "setUserRegion.php?region="+region, true);
+	xhttp.send();
+	
+	leaveGroup(user);
+	clearAllNotifications();
+}
+
+function clearAllNotifications(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+		  response = xhttp.responseText;
+		}
+	  };
+	xhttp.open("GET", "declineAllInvites.php", true);
+	xhttp.send();
+}
