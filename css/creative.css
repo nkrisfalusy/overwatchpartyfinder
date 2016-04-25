@@ -620,6 +620,6 @@ li {
    cursor: default;
 }
 
-a.dropdown-toggle.page-scroll {
+#selectedregion {
    padding-left: 0px;
 }
