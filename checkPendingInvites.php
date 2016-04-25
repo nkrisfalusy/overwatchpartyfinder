@@ -1,14 +1,10 @@
 <?php
+	include "include.php";
 	if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
 
-	$sqlhost = "localhost";
-	$sqluser = "root";
-	$sqlpass = "";
-	$sqldb = "wdw";
-	$tablename = "pendinginvites";
 	$user = $_SESSION['user_id'];
 	
 	//check if invite already exists

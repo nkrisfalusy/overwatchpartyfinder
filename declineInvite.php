@@ -1,12 +1,10 @@
 <?php
+	include "include.php";
 	if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
-	$sqlhost = "localhost";
-	$sqluser = "root";
-	$sqlpass = "";
-	$sqldb = "wdw";
+	
 	$invitee = $_GET['user'];
 	$invited = $_SESSION['user_id'];
 	$blank = "";

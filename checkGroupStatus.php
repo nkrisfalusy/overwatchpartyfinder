@@ -1,14 +1,12 @@
 <?php
+	include "include.php";
 	if(!isset($_SESSION)) 
 	{ 
 		session_start(); 
 	} 
 
 	//returns groupresult FALSE if the session user_id is in a group
-	$sqlhost = "localhost";
-	$sqluser = "root";
-	$sqlpass = "";
-	$sqldb = "wdw";
+	
 	$groupresult = true;
 	$groupid = "";
 	$usercolumn = 0;

@@ -1,9 +1,6 @@
 <?php
-	$sqlhost = "localhost";
-	$sqluser = "root";
-	$sqlpass = "";
-	$sqldb = "wdw";
-	$tablename = "users";
+	include "include.php";
+	
 	
 	try {
 		$conn = new PDO("mysql:host=$sqlhost;dbname=$sqldb", $sqluser, $sqlpass);

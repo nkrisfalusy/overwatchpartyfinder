@@ -1,9 +1,6 @@
 <?php
-	$sqlhost = "localhost";
-	$sqluser = "root";
-	$sqlpass = "";
-	$sqldb = "wdw";
-	$tablename = "users";
+	include "include.php";
+	
 	$output = array();
 	$value = "%".$_GET['value']."%";
 

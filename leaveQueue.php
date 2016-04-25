@@ -1,13 +1,10 @@
 <?php
+	include "include.php";
 	if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
-	$sqlhost = "localhost";
-	$sqluser = "root";
-	$sqlpass = "";
-	$sqldb = "wdw";
-	$tablename = "users";
+	
 	$userid = $_SESSION['user_id'];
 	try {
 		$conn = new PDO("mysql:host=$sqlhost;dbname=$sqldb", $sqluser, $sqlpass);

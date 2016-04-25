@@ -1,4 +1,5 @@
 <?php
+include "include.php";
 if(!isset($_SESSION)) 
 { 
 	session_start(); 
@@ -6,11 +7,7 @@ if(!isset($_SESSION))
 require('OAuth2/client.php');
 require('OAuth2/GrantType/IGrantType.php');
 require('OAuth2/GrantType/AuthorizationCode.php');
-$sqlhost = "localhost";
-$sqluser = "root";
-$sqlpass = "";
-$sqldb = "wdw";
-$tablename = "users";
+
 $status=true;
 $statuscode=0;
 

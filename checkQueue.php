@@ -1,14 +1,11 @@
 <?php
+	include "include.php";
 	if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
 	//returns false if the session user_id is in the queue, returns true if not in the queue
-	$sqlhost = "localhost";
-	$sqluser = "root";
-	$sqlpass = "";
-	$sqldb = "wdw";
-	$tablename = "queue";
+	
 	$queueresult = "true";
 	if(isset($_SESSION['user_id'])){
 		$userid = $_SESSION['user_id'];

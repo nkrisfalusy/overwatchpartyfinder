@@ -1,10 +1,6 @@
 <?php
+	include "include.php";
 	session_start();
-	$sqlhost = "localhost";
-	$sqluser = "root";
-	$sqlpass = "";
-	$sqldb = "wdw";
-	$tablename = "users";
 	
 	$userid = $_SESSION['user_id'];
 	$offense = "0";

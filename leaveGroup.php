@@ -1,9 +1,7 @@
 <?php
+	include "include.php";
 	include "checkGroup.php";
-	$sqlhost = "localhost";
-	$sqluser = "root";
-	$sqlpass = "";
-	$sqldb = "wdw";
+	
 	$user = $_SESSION['user_id'];
 	$blank = "";
 	try {
