@@ -7,6 +7,9 @@
 	$output = array();
 	$value = "%".$_GET['value']."%";
 	$region = $_SESSION['region'];
+	date_default_timezone_set("America/New_York");
+    	$stampstring= date("Y-m-d H:i:s");
+    	$stamp = new DateTime($stampstring);
 	
 	try {
 		$conn = new PDO("mysql:host=$sqlhost;dbname=$sqldb", $sqluser, $sqlpass);
@@ -22,7 +25,15 @@
 		$output =  $stmt->fetchAll();
 		$i=0;
 		while($i < count($output)){
-			echo $output[$i]['username']."~";
+			$lastaction = $output[$i]['timesincelastaction'];
+			$lastaction = new DateTime($lastaction );
+			$since_start = $lastaction->diff($stamp);
+			$minutes = $since_start->days * 24 * 60;
+			$minutes += $since_start->h * 60;
+			$minutes += $since_start->i;
+			if($minutes < 60){
+				echo $output[$i]['username']."~";
+			}
 			$i++;
 		}
 	

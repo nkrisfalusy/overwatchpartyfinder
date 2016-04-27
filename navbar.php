@@ -1,9 +1,10 @@
 <?php
 	include "include.php";
 	if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
+	    { 
+	        session_start(); 
+	    } 
+	//include "onlineStatus.php";
 	if(isset($_SESSION['user_id'])) :
 		$cleanuser = str_replace("#", "", $_SESSION['user_id']); 
 		if(!isset($_SESSION['region'])){
