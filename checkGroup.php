@@ -11,6 +11,8 @@
 	$groupid = "";
 	$usercolumn = 0;
 	$numofmembers = 0;
+	$isleader = false;
+	$leaderreplacement = "";
 	$members = array();
 	if(isset($_SESSION['user_id'])){
 		$userid = $_SESSION['user_id'];
@@ -31,28 +33,36 @@
 				$groupid = $output['id'];
 				if($output['player1'] != NULL){
 					if($output['player1']==$userid){$usercolumn=1;}
+					else{$leaderreplacement = $output['player1'];}
 					array_push($members, $output['player1']);
 					$numofmembers++;
 				}
 				if($output['player2'] != NULL){
 					if($output['player2']==$userid){$usercolumn=2;}
+					else{$leaderreplacement = $output['player2'];}
 					array_push($members, $output['player2']);
 					$numofmembers++;
 				}
 				if($output['player3'] != NULL){
 					if($output['player3']==$userid){$usercolumn=3;}
+					else{$leaderreplacement = $output['player3'];}
 					array_push($members, $output['player3']);
 					$numofmembers++;
 				}
 				if($output['player4'] != NULL){
 					if($output['player4']==$userid){$usercolumn=4;}
+					else{$leaderreplacement = $output['player4'];}
 					array_push($members, $output['player4']);
 					$numofmembers++;
 				}
 				if($output['player5'] != NULL){
 					if($output['player5']==$userid){$usercolumn=5;}
+					else{$leaderreplacement = $output['player5'];}
 					array_push($members, $output['player5']);
 					$numofmembers++;
+				}
+				if($output['leader'] == $userid){
+					$isleader = true;
 				}
 			}
 			else{

@@ -12,7 +12,7 @@
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 		// prepare sql and bind parameters
-		$stmt = $conn->prepare("INSERT INTO groups (player1) VALUES (:username)");
+		$stmt = $conn->prepare("INSERT INTO groups (player1, leader) VALUES (:username, :username)");
 		$stmt->bindParam(':username', $username);
 	 
 		$stmt->execute();

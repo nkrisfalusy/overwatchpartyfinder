@@ -77,15 +77,6 @@
 			
 				<?php if(isset($_SESSION['user_id']))	: ?>
 				<div id="searchbox" style="text-align:left"><div id="leftcolumn" class="col-lg-2 col-lg-offset-3">
-					<h4>Current Group:</h4>
-					<select class="form-control formitem" id="groupselect" style="width: 120px;">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-					</select>
-					<br>
 					<h4>Looking For:</h4>
 					<select id="lookingselect" class="form-control formitem" style="width: 120px;">
 						<option id="looking1" value="1">1</option>
@@ -96,19 +87,9 @@
 					</select>
 				</div>
 				<div id="centercolumn" class="col-lg-2">
-					<h4>Region:</h4>
-					<select class="form-control formitem" id="regionselect" style="width: 120px;">
-						<option value="Americas">Americas</option>
-						<option value="Europe">Europe</option>
-						<option value="Korea">Korea</option>
-						<option value="Taiwan">Taiwan</option>
-						<option value="China">China</option>
-						<option value="SoutheastAsia">Southeast Asia</option>
-					</select>
-					<br>
 					<h4>Preferred Language:</h4>
 					<select class="form-control formitem" id="languageselect" style="width: 120px;">
-						<option value="Engligh">Engligh</option>
+						<option value="Engligh">English</option>
 						<option value="Spanish">Spanish</option>
 						<option value="French">French</option>
 						<option value="German">German</option>
@@ -176,7 +157,9 @@
     <script src="js/scripts.js"></script>
 
 	<script>
-		
+		setInterval(function(){ 
+			searchGroupSize();
+		}, 1000);
 	</script>
 </body>
 

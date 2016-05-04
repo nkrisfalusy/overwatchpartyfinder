@@ -4,8 +4,8 @@
 	    { 
 	        session_start(); 
 	    } 
-	//include "onlineStatus.php";
 	if(isset($_SESSION['user_id'])) :
+		include "onlineStatus.php";
 		$cleanuser = str_replace("#", "", $_SESSION['user_id']); 
 		if(!isset($_SESSION['region'])){
 			$conn = new PDO("mysql:host=$sqlhost;dbname=$sqldb", $sqluser, $sqlpass);

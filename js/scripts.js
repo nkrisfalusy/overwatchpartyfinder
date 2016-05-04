@@ -1,5 +1,6 @@
 var numofnotifications = 0;
 var audio = new Audio('../sound/pop.mp3');
+var lastcheckedgroupsize = 0;
 
 function startGroup(user) {
 			var response = "";
@@ -13,7 +14,7 @@ function startGroup(user) {
 			  xhttp.open("GET", "createGroup.php?user="+userclean, false);
 			  xhttp.send();
 			  
-			  document.getElementById("groupinfo").innerHTML = "<img src=\"../img/defaultprofile.jpg\" class=\"profileimage\">&nbsp;&nbsp;<a onClick=\'toggleSearch()\'; class=\"btn btn-primary btn-sm page-scroll\">+</a>&nbsp;<a onClick=\'leaveGroup(\""+user+"\")\'; class=\"btn btn-primary btn-sm page-scroll\">X</a>";
+			  document.getElementById("groupinfo").innerHTML = "<img src=\"../img/defaultprofile.jpg\" class=\"profileimage\" id=\"profileimage0\">&nbsp;&nbsp;<a onClick=\'toggleSearch()\'; class=\"btn btn-primary btn-sm page-scroll\">+</a>&nbsp;<a onClick=\'leaveGroup(\""+user+"\")\'; class=\"btn btn-primary btn-sm page-scroll\">X</a>";
 }
 function leaveGroup(user) {
 	var response = "";
@@ -82,46 +83,6 @@ $(document).ready(function(){
 			$('.glyphicon-info-sign').popover({content: "Unselected roles are assumed open.", trigger: "click", placement: "top"}); 
 		});
 	
-$("#groupselect").on('change', function(){
-  document.getElementById("lookingselect").selectedIndex = 0;
-  switch(parseInt($("#groupselect option:selected").val())) {
-		case 1:
-			$("#looking5").attr('disabled',false);
-			$("#looking4").attr('disabled',false);
-			$("#looking3").attr('disabled',false);
-			$("#looking2").attr('disabled',false);
-			$("#looking1").attr('disabled',false);
-			break;
-		case 2:
-			$("#looking5").attr('disabled',true);
-			$("#looking4").attr('disabled',false);
-			$("#looking3").attr('disabled',false);
-			$("#looking2").attr('disabled',false);
-			$("#looking1").attr('disabled',false);
-			break;
-		case 3:
-			$("#looking5").attr('disabled',true);
-			$("#looking4").attr('disabled',true);
-			$("#looking3").attr('disabled',false);
-			$("#looking2").attr('disabled',false);
-			$("#looking1").attr('disabled',false);
-			break;
-		case 4:
-			$("#looking5").attr('disabled',true);
-			$("#looking4").attr('disabled',true);
-			$("#looking3").attr('disabled',true);
-			$("#looking2").attr('disabled',false);
-			$("#looking1").attr('disabled',false);
-			break;
-		default:
-			$("#looking5").attr('disabled',true);
-			$("#looking4").attr('disabled',true);
-			$("#looking3").attr('disabled',true);
-			$("#looking2").attr('disabled',true);
-			$("#looking1").attr('disabled',false);
-			break;
-  }
-});
 
 function searchSubmit(){
 	var urlextension = "searchSubmit?";
@@ -208,14 +169,15 @@ function searchSubmit(){
 }
 
 window.onload = checkForInvites();
+window.onload = checkGroupStatus();
 setInterval(function(){ 
 	checkForInvites();
 }, 1000);
 
-setInterval(function(){ 
+/*setInterval(function(){ 
 	checkGroupStatus();
 }, 1000);
-
+*/
 function checkGroupStatus(){
 	var el = document.getElementById("groupinfo");
 	var inner = "";
@@ -231,11 +193,16 @@ function checkGroupStatus(){
 	var groupsize = response.split("~")[0];
 	var user =  response.split("~")[1];
 	var members = response.split("~")[2].split(",");
+	var leader = response.split("~")[3];
 	console.log("group size: " + groupsize);
 	if(groupsize > 0){
 		var i = 0;
 		while(i<groupsize){
-			inner += "<img src=\"../img/defaultprofile.jpg\" class=\"profileimage\" title=\""+members[i]+"\">&nbsp;";
+			if(members[i]==leader){
+				inner += "<span class =\"leaderimage\"><img src=\"../img/defaultprofile.jpg\" class=\"profileimage\" id=\"profileimage"+i+"\" title=\""+members[i]+"\"></span>&nbsp;";
+			}else{
+				inner += "<span class =\"memberimage\"><img src=\"../img/defaultprofile.jpg\" class=\"profileimage\" id=\"profileimage"+i+"\" title=\""+members[i]+"\"></span>&nbsp;";
+			}
 			i++;
 		}
 		inner += "&nbsp;&nbsp;<a onClick=\'toggleSearch()\'; class=\"btn btn-primary btn-sm page-scroll\">+</a>&nbsp;<a onClick=\'leaveGroup(\""+user+"\")\'; class=\"btn btn-primary btn-sm page-scroll\">X</a>";
@@ -243,6 +210,62 @@ function checkGroupStatus(){
 	}else{
 		el.innerHTML = "<a onClick=\'startGroup(\""+user+"\")\'; class=\"btn btn-primary btn-sm page-scroll\">Start Group</a>";
 	}
+}
+
+function searchGroupSize(){
+	var response = "";
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+		  response = xhttp.responseText;
+		}
+	  };
+	xhttp.open("GET", "checkGroupStatus.php", false);
+	xhttp.send();
+	var groupsize = response.split("~")[0];
+	var groupcount = parseInt(groupsize);
+	if(groupcount != lastcheckedgroupsize){
+		document.getElementById("lookingselect").selectedIndex = 0;
+		lastcheckedgroupsize = groupcount;
+		switch(groupcount) {
+		case 1:
+			$("#looking5").attr('disabled',false);
+			$("#looking4").attr('disabled',false);
+			$("#looking3").attr('disabled',false);
+			$("#looking2").attr('disabled',false);
+			$("#looking1").attr('disabled',false);
+			break;
+		case 2:
+			$("#looking5").attr('disabled',true);
+			$("#looking4").attr('disabled',false);
+			$("#looking3").attr('disabled',false);
+			$("#looking2").attr('disabled',false);
+			$("#looking1").attr('disabled',false);
+			break;
+		case 3:
+			$("#looking5").attr('disabled',true);
+			$("#looking4").attr('disabled',true);
+			$("#looking3").attr('disabled',false);
+			$("#looking2").attr('disabled',false);
+			$("#looking1").attr('disabled',false);
+			break;
+		case 4:
+			$("#looking5").attr('disabled',true);
+			$("#looking4").attr('disabled',true);
+			$("#looking3").attr('disabled',true);
+			$("#looking2").attr('disabled',false);
+			$("#looking1").attr('disabled',false);
+			break;
+		default:
+			$("#looking5").attr('disabled',true);
+			$("#looking4").attr('disabled',true);
+			$("#looking3").attr('disabled',true);
+			$("#looking2").attr('disabled',true);
+			$("#looking1").attr('disabled',false);
+			break;
+	}
+	}
+	
 }
 
 function checkForInvites(){
@@ -259,8 +282,7 @@ function checkForInvites(){
 	xhttp.open("GET", "checkPendingInvites.php", false);
 	xhttp.send();
 	if(response.length > 0){
-		
-		document.getElementById("notification").className = "glyphicon glyphicon-align-justify notificationbutton";
+		document.getElementById("notifybutton").className = "btn btn-primary btn-sm page-scroll notificationbutton";
 		var holder = response.split("~");
 		if(holder.length-1 > numofnotifications){
 			audio.play();
@@ -275,7 +297,7 @@ function checkForInvites(){
 		}
 		el.innerHTML = inner;
 	}else{
-		document.getElementById("notification").className = "glyphicon glyphicon-align-justify notificationbutton no-notification";
+		document.getElementById("notifybutton").className = "btn btn-primary btn-sm page-scroll notificationbutton no-notification";
 		el.innerHTML = "";
 		numofnotifications=0;
 	}
@@ -333,6 +355,8 @@ function setSelectedRegion(region, user){
 	
 	leaveGroup(user);
 	clearAllNotifications();
+	$('#usersearchbox').hide();
+	$('#notificationbox').hide();
 }
 
 function clearAllNotifications(){

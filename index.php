@@ -73,7 +73,7 @@
                 <?php
 					$loggedin="";
 					if(isset($_SESSION['user_id'])) : ?>
-						<a href="search" class="btn btn-primary btn-massive page-scroll">Find Group</a>
+						<a href="search" id="findgroupbtn" class="btn btn-primary btn-massive page-scroll">Find Group</a>
 				<?php else : ?>
 					<a href="getBNet" class="btn btn-primary btn-xl page-scroll">Login</a>
 				<?php endif; ?>

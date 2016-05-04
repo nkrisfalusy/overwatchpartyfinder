@@ -3,7 +3,7 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
-
+ 
 html,
 body {
     width: 100%;
@@ -597,22 +597,42 @@ li {
 }
 
 .notificationbutton {
-	position: relative;
+	animation-name: flash;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
 }
 
-.notificationbutton:after {
+.notificationbutton.no-notification {
+	animation-name: none;
+}
+
+.leaderimage {
+	position: relative;
+	height: 50px;
+	width: 50px:
+}
+
+.leaderimage:after{
 	display: block;
-	background-image: url('../img/sign.png');
+	background-image: url('../img/leader.png');
 	background-repeat: no-repeat;
-	content : '';
+	content: '';
 	position: absolute;
 	background-size: contain;
-	top: -15px; right: -15px;
-	width: 200%; height: 200%;
+	top: -15px; right: -35px;
+	width: 100%; height: 100%;
 }
 
-.notificationbutton.no-notification:after {
-	display: none;
+@keyframes flash {
+	0%{
+		background: #f05f40;
+	}
+	50%{
+		background: #ffffff;
+	}
+	100%{
+		background: #f05f40;
+	}
 }
 
 .inactiveLink {

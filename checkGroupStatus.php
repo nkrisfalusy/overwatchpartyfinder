@@ -12,6 +12,7 @@
 	$usercolumn = 0;
 	$numofmembers = 0;
 	$members = array();
+	$leader = "";
 	if(isset($_SESSION['user_id'])){
 		$userid = $_SESSION['user_id'];
 		try {
@@ -47,6 +48,7 @@
 					array_push($members, $output['player5']);
 					$numofmembers++;
 				}
+				$leader = $output['leader'];
 			}
 		}
 	catch(PDOException $e)
@@ -54,5 +56,5 @@
 		echo "Error: " . $e->getMessage();
 		}
 	}
-	echo $numofmembers."~".$userid."~".join(',', $members);
+	echo $numofmembers."~".$userid."~".join(',', $members)."~".$leader;
 ?>

@@ -5,8 +5,8 @@
 	        session_start(); 
 	    } 
 	date_default_timezone_set("America/New_York");
-    	$stampstring= date("Y-m-d H:i:s");
-    	$stamp = new DateTime($stampstring);
+	$stampstring= date("Y-m-d H:i:s");
+	$stamp = new DateTime($stampstring);
 	$user = $_SESSION['user_id'];
 	
 	
@@ -27,7 +27,7 @@
 	$minutes += $since_start->h * 60;
 	$minutes += $since_start->i;
 	
-	if($minutes > 60){
+	if($minutes > 30){
 		$stmt = $conn->prepare("UPDATE users SET timesincelastaction=:time WHERE username=:user");
 	 	$stmt->bindParam(':user', $user);
 	 	$stmt->bindParam(':time', $stampstring);
