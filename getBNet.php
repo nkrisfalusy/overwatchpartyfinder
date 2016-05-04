@@ -1,5 +1,5 @@
 <?php
-include "include.php";
+include "../include.php";
 if(!isset($_SESSION)) 
 { 
 	session_start(); 
