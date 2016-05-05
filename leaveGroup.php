@@ -1,7 +1,11 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 	include "include.php";
 	$usertoleave = $_GET['user'];
+=======
+	include "../include.php";
+>>>>>>> origin/master
 =======
 	include "../include.php";
 >>>>>>> origin/master
