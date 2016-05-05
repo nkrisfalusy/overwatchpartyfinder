@@ -1,10 +1,6 @@
 <?php
 	$sqlhost = "localhost";
-	/*$sqluser = "kydbmaster";
+	$sqluser = "kydbmaster";
 	$sqlpass = "]??}ZDRH]n(E";
-	$sqldb = "owgf";*/
-	
-	$sqluser = "root";
-	$sqlpass = "";
-	$sqldb = "wdw";
+	$sqldb = "owgf";
 ?>
