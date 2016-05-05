@@ -1,14 +1,5 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
-	include "include.php";
-	$userid = "";
-=======
 	include "../include.php";
->>>>>>> origin/master
-=======
-	include "../include.php";
->>>>>>> origin/master
 	if(!isset($_SESSION)) 
 	{ 
 		session_start(); 
