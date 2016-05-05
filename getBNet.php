@@ -1,49 +1,20 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
-include "include.php";
-=======
 include "../include.php";
->>>>>>> origin/master
-=======
-include "../include.php";
->>>>>>> origin/master
 if(!isset($_SESSION)) 
 { 
 	session_start(); 
 } 
-<<<<<<< HEAD
-<<<<<<< HEAD
-require('OAuth2/client.php');
-=======
 require('OAuth2/Client.php');
->>>>>>> origin/master
-=======
-require('OAuth2/Client.php');
->>>>>>> origin/master
 require('OAuth2/GrantType/IGrantType.php');
 require('OAuth2/GrantType/AuthorizationCode.php');
 
 $status=true;
 $statuscode=0;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-$client_id = 'aptj73rpvkyx33qgj3zkswjrypcqubp7';
-$client_secret = 'HQGhc4cbeuQdtFEPyWEkrV7ZC8b46kNp';
-
-$redirect_uri = 'https://mywebsite.dev/getBNet';
-=======
-=======
->>>>>>> origin/master
 $client_id = 'kavksyvk657hnmvke6w2jv9kqkny3hpj';
 $client_secret = 'tBv4qaYuE29pKhFdQHzWkks9Ydu2cKVN';
 
 $redirect_uri = 'https://www.overwatchpartyfinder.com/getBNet';
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
 $authorize_uri = 'https://us.battle.net/oauth/authorize';
 $token_uri = 'https://us.battle.net/oauth/token';
 
@@ -72,15 +43,7 @@ else {
 
 	// prepare sql and bind parameters
 	$stmt = $conn->prepare("SELECT * FROM users WHERE username=:username");
-<<<<<<< HEAD
-<<<<<<< HEAD
-	$stmt->bindParam(':username', $username);
-=======
 	$stmt->bindParam(':username', $battletag);
->>>>>>> origin/master
-=======
-	$stmt->bindParam(':username', $battletag);
->>>>>>> origin/master
  
 	$stmt->execute();
 	$output =  $stmt->fetch(PDO::FETCH_ASSOC);
