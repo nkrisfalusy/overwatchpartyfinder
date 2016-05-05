@@ -1,9 +1,24 @@
 <?php
+<<<<<<< HEAD
 	include "include.php";
+	$userid = "";
+=======
+	include "../include.php";
+>>>>>>> origin/master
 	if(!isset($_SESSION)) 
 	{ 
 		session_start(); 
 	} 
+	
+	if(isset($_SESSION['user_id']))
+	{
+		$userid = $_SESSION['user_id'];
+	}
+	
+	if(isset($usertoleave))
+	{
+		$userid = $usertoleave;
+	}
 
 	//returns groupresult FALSE if the session user_id is in a group
 
@@ -15,7 +30,6 @@
 	$leaderreplacement = "";
 	$members = array();
 	if(isset($_SESSION['user_id'])){
-		$userid = $_SESSION['user_id'];
 		try {
 			$conn = new PDO("mysql:host=$sqlhost;dbname=$sqldb", $sqluser, $sqlpass);
 			// set the PDO error mode to exception

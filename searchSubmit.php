@@ -1,5 +1,5 @@
 <?php
-	include "include.php";
+	include "../include.php";
 	session_start();
 	
 	$userid = $_SESSION['user_id'];

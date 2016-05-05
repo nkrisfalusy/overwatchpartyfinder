@@ -1,5 +1,5 @@
 <?php
-	include "include.php";
+	include "../include.php";
 	if(!isset($_SESSION)) 
 	    { 
 	        session_start(); 
@@ -23,7 +23,7 @@
 		?>
 		<li><a href="#" data-toggle="dropdown" class="dropdown-toggle page-scroll"><?php echo $_SESSION['user_id']?></a>
 			<ul class="dropdown-menu">
-				<li><a href="profile?id=<?php echo $cleanuser;?>">Profile</a></li>
+				<li><a href="profile?id=<?php echo str_replace('#', '%23', $_SESSION['user_id']);?>">Profile</a></li>
 				<li><a href="logout">Logout</a></li>
 			</ul>
 		</li>

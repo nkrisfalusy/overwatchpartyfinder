@@ -215,13 +215,17 @@ header .header-content .header-content-inner hr {
 }
 
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     height: 50px;
-	text-align: right;
 	padding-right: 15px;
 	padding-left: 15px;
+	
+}
+
+.rightfooter {
+text-align: right;
 }
 
 header .header-content .header-content-inner p {
@@ -618,8 +622,8 @@ li {
 	background-repeat: no-repeat;
 	content: '';
 	position: absolute;
-	background-size: contain;
-	top: -15px; right: -35px;
+	background-size: 18px 18px;
+	top: -15px; right: 0px;
 	width: 100%; height: 100%;
 }
 
@@ -642,4 +646,65 @@ li {
 
 #selectedregion {
    padding-left: 0px;
+}
+
+.socialmedia {
+	text-align: bottom;
+	height: 30px;
+	width: 30px;
+	left: 10px;
+}
+
+.leftfooter {
+	bottom: 0px;
+	left: 0px;
+}
+
+.rightfooter {
+	position: fixed;
+	bottom: 5px;
+	right: 5px;
+}
+
+.leftfooter>a{
+	z-index: 10;
+	text-decoration: none;
+}
+
+#dropup0{
+    top: auto;
+	left: 200px;
+    bottom: 100% !important;
+}
+#dropup1{
+    top: auto;
+	left: 200px;
+    bottom: 100% !important;
+}
+#dropup2{
+    top: auto;
+	left: 200px;
+    bottom: 100% !important;
+}
+#dropup3{
+    top: auto;
+	left: 200px;
+    bottom: 100% !important;
+}
+#dropup4{
+    top: auto;
+	left: 200px;
+    bottom: 100% !important;
+}
+
+lh{
+	font-size: 12px;
+	font-weight: bold;
+	padding-left: 5px;
+}
+
+ul > hr {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	max-width: none;
 }

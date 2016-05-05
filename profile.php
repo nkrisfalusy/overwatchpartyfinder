@@ -1,3 +1,8 @@
+<?php
+	session_start();
+	$profile = $_GET['id'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +57,6 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
 					<?php
-						session_start();
 						include 'navbar.php';
 					?>
                 </ul>
@@ -66,7 +70,7 @@
         <div class="header-content-left">
 			<?php if(isset($_SESSION['user_id'])) : ?>
 				<div class="header-content-inner" style="text-align: center">
-					<h1 style="text-align: left"><?php echo $_SESSION['user_id'];?></h1>
+					<h1 style="text-align: left"><?php echo $profile;?></h1>
 				</div>
 				<br><br><br>
 				

@@ -13,6 +13,15 @@
 		</ul>
 </div>
 <footer class="footer">
+<span class="leftfooter">
+<a href="https://www.facebook.com/overwatchpartyfinder" target="_blank">
+	<img class="socialmedia" src="../img/facebook.png" />
+</a>
+<a href="https://www.twitter.com/overwatchpf" target="_blank">
+	<img class="socialmedia" src="../img/twitter.png" />
+</a>
+</span>
+<span class="rightfooter" id="rightfoot">
 <?php
 		if(!isset($_SESSION)) 
 		{ 
@@ -39,4 +48,5 @@
 			<a onClick='toggleNotifications()'; class="btn btn-primary btn-sm page-scroll notificationbutton no-notification" id="notifybutton"><span id="notification" class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
 		<?php endif; 
 ?>
+</span>
 </footer>

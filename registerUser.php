@@ -1,5 +1,5 @@
 <?php
-	include "include.php";
+	include "../include.php";
 	
 	$status=true;
 	$statuscode=0;

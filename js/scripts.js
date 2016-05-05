@@ -1,6 +1,7 @@
 var numofnotifications = 0;
 var audio = new Audio('../sound/pop.mp3');
 var lastcheckedgroupsize = 0;
+var lastcheckedgroup = "";
 
 function startGroup(user) {
 			var response = "";
@@ -25,7 +26,7 @@ function leaveGroup(user) {
 		  response = xhttp.responseText;
 		}
 	  };
-	  xhttp.open("GET", "leaveGroup.php", false);
+	  xhttp.open("GET", "leaveGroup.php?user="+userclean, false);
 	  xhttp.send();
 	  
 	  document.getElementById("groupinfo").innerHTML = "<a onClick=\'startGroup(\""+user+"\")\'; class=\"btn btn-primary btn-sm page-scroll\">Start Group</a>";
@@ -74,7 +75,6 @@ function inviteUser(user) {
 		  response = xhttp.responseText;
 		}
 	  };
-	  console.log("createPendingInvite.php?user="+userclean);
 	  xhttp.open("GET", "createPendingInvite.php?user="+userclean, false);
 	  xhttp.send();
 }
@@ -162,9 +162,6 @@ function searchSubmit(){
 	if(Curse){
 		urlextension += "&curse=1";
 	}
-	
-	console.log(urlextension);
-	
 	window.location=urlextension;
 }
 
@@ -174,10 +171,10 @@ setInterval(function(){
 	checkForInvites();
 }, 1000);
 
-/*setInterval(function(){ 
+setInterval(function(){ 
 	checkGroupStatus();
 }, 1000);
-*/
+
 function checkGroupStatus(){
 	var el = document.getElementById("groupinfo");
 	var inner = "";
@@ -190,27 +187,120 @@ function checkGroupStatus(){
 	  };
 	xhttp.open("GET", "checkGroupStatus.php", false);
 	xhttp.send();
-	var groupsize = response.split("~")[0];
-	var user =  response.split("~")[1];
-	var members = response.split("~")[2].split(",");
-	var leader = response.split("~")[3];
-	console.log("group size: " + groupsize);
-	if(groupsize > 0){
-		var i = 0;
-		while(i<groupsize){
-			if(members[i]==leader){
-				inner += "<span class =\"leaderimage\"><img src=\"../img/defaultprofile.jpg\" class=\"profileimage\" id=\"profileimage"+i+"\" title=\""+members[i]+"\"></span>&nbsp;";
-			}else{
-				inner += "<span class =\"memberimage\"><img src=\"../img/defaultprofile.jpg\" class=\"profileimage\" id=\"profileimage"+i+"\" title=\""+members[i]+"\"></span>&nbsp;";
+	if(response != lastcheckedgroup){
+		var groupsize = response.split("~")[0];
+		var user =  response.split("~")[1];
+		var members = response.split("~")[2].split(",");
+		var leader = response.split("~")[3];
+		if(groupsize > 0){
+			if(user == leader){
+				var i = 0;
+				while(i<groupsize){
+					if(members[i]==leader){
+						inner += "<span=\"btn-group\"><span id=\"toggledropup"+i+"\" class=\"leaderimage dropdown-toggle\" data-toggle=\"dropdown\"><img src=\"../img/defaultprofile.jpg\" class=\"profileimage\" id=\"profileimage"+i+"\" title=\""+members[i]+"\"></span><ul class=\"dropdown-menu drop-up\" id=\"dropup"+i+"\"><lh>"+members[i]+"</lh><hr><li><a onclick=\"viewProfile('"+members[i]+"');\">Profile</a></li></ul></span>&nbsp;";
+					}else{
+						inner += "<span=\"btn-group\"><span id=\"toggledropup"+i+"\" class =\"memberimage dropdown-toggle\"  data-toggle=\"dropdown\"><img src=\"../img/defaultprofile.jpg\" class=\"profileimage\" id=\"profileimage"+i+"\" title=\""+members[i]+"\"></span><ul class=\"dropdown-menu drop-up\" id=\"dropup"+i+"\"><lh>"+members[i]+"</lh><hr><li><a onclick=\"viewProfile('"+members[i]+"');\">Profile</a></li><li><a onclick=\"promoteToLeader('"+members[i]+"');\">Promote to Leader</a></li><li><a onclick=\"kickFromGroup('"+members[i]+"');\">Kick</a></li></ul></span>&nbsp;";
+					}
+				i++;
+				}
+				inner += "&nbsp;&nbsp;<a onClick=\'toggleSearch()\'; class=\"btn btn-primary btn-sm page-scroll\">+</a>&nbsp;<a onClick=\'leaveGroup(\""+user+"\")\'; class=\"btn btn-primary btn-sm page-scroll\">X</a>";
+				el.innerHTML = inner;
 			}
-			i++;
+			else{
+				var i = 0;
+				while(i<groupsize){
+					if(members[i]==leader){
+						inner += "<span=\"btn-group\"><span id=\"toggledropup"+i+"\" class=\"leaderimage dropdown-toggle\" data-toggle=\"dropdown\"><img src=\"../img/defaultprofile.jpg\" class=\"profileimage\" id=\"profileimage"+i+"\" title=\""+members[i]+"\"></span><ul class=\"dropdown-menu drop-up\" id=\"dropup"+i+"\"><lh>"+members[i]+"</lh><hr><li><a onclick=\"viewProfile('"+members[i]+"');\">Profile</a></li></ul></span>&nbsp;";
+					}else{
+						inner += "<span=\"btn-group\"><span id=\"toggledropup"+i+"\" class =\"memberimage dropdown-toggle\"  data-toggle=\"dropdown\"><img src=\"../img/defaultprofile.jpg\" class=\"profileimage\" id=\"profileimage"+i+"\" title=\""+members[i]+"\"></span><ul class=\"dropdown-menu drop-up\" id=\"dropup"+i+"\"><lh>"+members[i]+"</lh><hr><li><a onclick=\"viewProfile('"+members[i]+"');\">Profile</a></li></ul></span>&nbsp;";
+					}
+				i++;
+				}
+				inner += "&nbsp;&nbsp;<a onClick=\'toggleSearch()\'; class=\"btn btn-primary btn-sm page-scroll\">+</a>&nbsp;<a onClick=\'leaveGroup(\""+user+"\")\'; class=\"btn btn-primary btn-sm page-scroll\">X</a>";
+				el.innerHTML = inner;
+			}
+			$('#toggledropup0').on('click', function(e){
+				setposition(e, 0);
+			});
+			$('#toggledropup1').on('click', function(e){
+				setposition(e, 1);
+			});
+			$('#toggledropup2').on('click', function(e){
+				setposition(e, 2);
+			});
+			$('#toggledropup3').on('click', function(e){
+				setposition(e, 3);
+			});
+			$('#toggledropup4').on('click', function(e){
+				setposition(e, 4);
+			});
+		}else{
+			el.innerHTML = "<a onClick=\'startGroup(\""+user+"\")\'; class=\"btn btn-primary btn-sm page-scroll\">Start Group</a>";
 		}
-		inner += "&nbsp;&nbsp;<a onClick=\'toggleSearch()\'; class=\"btn btn-primary btn-sm page-scroll\">+</a>&nbsp;<a onClick=\'leaveGroup(\""+user+"\")\'; class=\"btn btn-primary btn-sm page-scroll\">X</a>";
-		el.innerHTML = inner;
+		lastcheckedgroup = response;
 	}else{
-		el.innerHTML = "<a onClick=\'startGroup(\""+user+"\")\'; class=\"btn btn-primary btn-sm page-scroll\">Start Group</a>";
 	}
 }
+
+function viewProfile(user){
+	var url = "/profile?id="+user;
+	var win = window.open(url, '_blank');
+	win.focus();	
+}
+
+function promoteToLeader(user){
+	var response = "";
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+		  response = xhttp.responseText;
+		}
+	  };
+	xhttp.open("GET", "setGroupLeader.php?user="+user.replace("#", "%23"), false);
+	xhttp.send();
+}
+
+function kickFromGroup(user){
+	var response = "";
+	userclean = user.replace("#", "%23");
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+		  response = xhttp.responseText;
+		}
+	  };
+	  xhttp.open("GET", "leaveGroup.php?user="+userclean, false);
+	  xhttp.send();
+}
+
+function setposition(e, pos) {
+    var bodyOffsets = document.body.getBoundingClientRect();
+    tempX = e.pageX - bodyOffsets.left;
+    tempY = e.pageY;
+	var zeropoint = $(window).width() - $("#rightfoot").width();
+	var moveit = tempX - zeropoint;
+	switch(pos){
+		case 0:
+			$("#dropup0").css({'left': moveit });
+		break;
+		case 1:
+			$("#dropup1").css({'left': moveit });
+		break;
+		case 2:
+			$("#dropup2").css({'left': moveit });
+		break;
+		case 3:
+			$("#dropup3").css({'left': moveit });
+		break;
+		case 4:
+			$("#dropup4").css({'left': moveit });
+		break;
+	}
+	
+    
+}
+
+
 
 function searchGroupSize(){
 	var response = "";
@@ -269,7 +359,6 @@ function searchGroupSize(){
 }
 
 function checkForInvites(){
-	console.log("Checking for invites. number of notifications: " + numofnotifications);
 	var el = document.getElementById("notificationslist");
 	var inner = "";
 	var response = "";
