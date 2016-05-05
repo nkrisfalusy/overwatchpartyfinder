@@ -1,5 +1,5 @@
 <?php
-	include "include.php";
+	include "../include.php";
 	$usertoleave = $_GET['user'];
 	include "checkGroup.php";
 	
