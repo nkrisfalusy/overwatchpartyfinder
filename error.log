@@ -1,6 +1,0 @@
-[Wed Mar 09 22:12:30.199570 2016] [core:error] [pid 15476:tid 1124] (20023)The given path was above the root path: [client 127.0.0.1:51325] AH00127: Cannot map GET /login HTTP/1.1 to file
-[Wed Mar 09 22:12:32.071116 2016] [core:error] [pid 15476:tid 1124] (20023)The given path was above the root path: [client 127.0.0.1:51325] AH00127: Cannot map GET /login HTTP/1.1 to file
-[Wed Mar 09 22:28:54.382224 2016] [core:error] [pid 5504:tid 1108] (20023)The given path was above the root path: [client 127.0.0.1:51851] AH00127: Cannot map GET /login HTTP/1.1 to file, referer: http://mywebsite.dev/
-[Wed Apr 13 20:33:20.562936 2016] [:error] [pid 54836:tid 1160] [client 127.0.0.1:61690] script 'C:/wamp/www/wdw/startGroup.php' not found or unable to stat
-[Wed Apr 13 20:33:42.018624 2016] [:error] [pid 54836:tid 1028] [client 127.0.0.1:61697] script 'C:/wamp/www/wdw/startGroup.php' not found or unable to stat
-[Thu Apr 14 18:38:36.363301 2016] [:error] [pid 2260:tid 1188] [client 127.0.0.1:55613] script 'C:/wamp/www/wdw/declineInvite.php' not found or unable to stat, referer: http://mywebsite.dev/index
